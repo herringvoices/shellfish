@@ -37,11 +37,10 @@ Table Bookshelves {
 Table Books {
 	Id int [pk, increment]
 	Title varchar
-	Author varchar
-	IsSeries boolean
+	Author varchar	IsSeries boolean
 	SeriesName varchar
 	Volume int
-	GenreId int [ref: > Genres.Id]
+	CategoryId int [ref: > Categories.Id]
 	GoogleBooksId varchar
 	LibraryId int [ref: > Libraries.Id]
 	BookshelfId int [ref: > Bookshelves.Id] // Each book belongs to one bookshelf
