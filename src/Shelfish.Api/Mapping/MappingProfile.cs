@@ -10,7 +10,7 @@ public class MappingProfile : Profile
     {
         /* ---------- Basic entity→DTO maps ---------- */
         CreateMap<Library, LibraryDto>();
-        CreateMap<Genre, GenreDto>();
+        CreateMap<Category, CategoryDto>();
         CreateMap<Bookshelf, BookshelfDto>();
         CreateMap<Book, BookDto>();
         CreateMap<PatronAccount, PatronAccountDto>();
@@ -23,7 +23,7 @@ public class MappingProfile : Profile
         CreateMap<LibraryDto, Library>()
             .ReverseMap();
         CreateMap<BookDto, Book>().ReverseMap();
-        CreateMap<GenreDto, Genre>().ReverseMap();
+        CreateMap<CategoryDto, Category>().ReverseMap();
         CreateMap<PatronAccountDto, PatronAccount>().ReverseMap();
         CreateMap<ReviewDto, Review>().ReverseMap();
         CreateMap<NoteDto, Note>().ReverseMap();

@@ -23,7 +23,7 @@ Table PatronAccounts {
 	LibraryId int [ref: > Libraries.Id]
 }
 
-Table Genres {
+Table Categories {
 	Id int [pk, increment]
 	Name varchar
 }

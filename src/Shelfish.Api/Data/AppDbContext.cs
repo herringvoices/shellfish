@@ -10,7 +10,7 @@ public class AppDbContext : IdentityDbContext<User>
         : base(options) { }
 
     public DbSet<Library> Libraries => Set<Library>();
-    public DbSet<Genre> Genres => Set<Genre>();
+    public DbSet<Category> Categories => Set<Category>();
     public DbSet<Book> Books => Set<Book>();
     public DbSet<Bookshelf> Bookshelves => Set<Bookshelf>();
     public DbSet<PatronAccount> PatronAccounts => Set<PatronAccount>();

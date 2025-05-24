@@ -19,8 +19,8 @@ public class Book
     public string? SeriesName { get; set; }
     public int? Volume { get; set; }
 
-    public int? GenreId { get; set; }
-    public Genre? Genre { get; set; }
+    public int? CategoryId { get; set; }
+    public Category? Category { get; set; }
 
     public string? GoogleBooksId { get; set; }
 

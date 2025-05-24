@@ -7,7 +7,7 @@ public record BookDto(
     bool IsSeries,
     string? SeriesName,
     int? Volume,
-    int? GenreId,
+    int? CategoryId,
     string? GoogleBooksId,
     int? BookshelfId
 );
