@@ -1,0 +1,98 @@
+Table Users {
+	Id int [pk, increment]
+	FirstName varchar
+	LastName varchar
+	Email varchar
+	// Only librarians are users
+}
+
+Table Libraries {
+	Id int [pk, increment]
+	Name varchar
+	IsClassroom boolean // True = classroom/private, False = public
+	LibrarianId int [ref: > Users.Id]
+	LibraryCode varchar // 7-letter code, used as PatronAccount password in classroom libs
+}
+
+Table PatronAccounts {
+	Id int [pk, increment]
+	FirstName varchar
+	LastName varchar
+	UserName varchar // Unique within a library; auto-incremented if needed (e.g., Logan.Gromp2)
+	Password varchar // The library code; same for all patrons in this library
+	LibraryId int [ref: > Libraries.Id]
+}
+
+Table Genres {
+	Id int [pk, increment]
+	Name varchar
+}
+
+Table Bookshelves {
+	Id int [pk, increment]
+	Name varchar
+	LibraryId int [ref: > Libraries.Id]
+}
+
+Table Books {
+	Id int [pk, increment]
+	Title varchar
+	Author varchar
+	IsSeries boolean
+	SeriesName varchar
+	Volume int
+	GenreId int [ref: > Genres.Id]
+	GoogleBooksId varchar
+	LibraryId int [ref: > Libraries.Id]
+	BookshelfId int [ref: > Bookshelves.Id] // Each book belongs to one bookshelf
+}
+
+Table Reviews {
+	Id int [pk, increment]
+	BookId int [ref: > Books.Id]
+	PatronAccountId int [ref: > PatronAccounts.Id] // Nullable, only for classroom libraries
+	LibraryId int [ref: > Libraries.Id]
+	Name varchar // Nullable; for public reviews
+	Rating int
+	Body text
+	CreatedAt datetime
+}
+
+Table Notes {
+	Id int [pk, increment]
+	BookId int [ref: > Books.Id]
+	PatronAccountId int [ref: > PatronAccounts.Id] // Nullable
+	Body text
+	CreatedAt datetime
+}
+
+Table ReadingLogs {
+	Id int [pk, increment]
+	BookId int [ref: > Books.Id]
+	PatronAccountId int [ref: > PatronAccounts.Id]
+	ReadAt datetime
+}
+
+Table Checkouts {
+	Id int [pk, increment]
+	BookId int [ref: > Books.Id]
+	PatronAccountId int [ref: > PatronAccounts.Id] // Nullable if staff ever checks out; likely not needed
+	CheckedOutAt datetime
+	DueDate datetime
+	ReturnedAt datetime
+	ApprovedById int [ref: > Users.Id]
+}
+
+Index {
+  name: "UQ_PatronAccounts_LibraryId_UserName"
+  unique: true
+  table: PatronAccounts
+  columns: [LibraryId, UserName]
+}
+
+Index {
+  name: "UQ_ReadingLogs_PatronAccountId_BookId"
+  unique: true
+  table: ReadingLogs
+  columns: [PatronAccountId, BookId]
+}
